@@ -100,6 +100,17 @@ app.factory('NgTableParams', ['$q', '$log', 'ngTableDefaults', function($q, $log
 
         /**
          * @ngdoc method
+         * @name NgTableParams#isMobileDevice
+         * @description Return true if screen size < 768px
+         *
+         * @returns {Bool}
+         */
+        this.isMobileDevice = function () {
+            return window.screen.availWidth < 768;// @TODO magic number 768
+        };
+
+        /**
+         * @ngdoc method
          * @name NgTableParams#page
          * @description If parameter page not set return current page else set current page
          *
@@ -425,7 +436,7 @@ app.factory('NgTableParams', ['$q', '$log', 'ngTableDefaults', function($q, $log
             filterDelay: 750,
             counts: [10, 25, 50, 100],
             paginationMaxBlocks: 11,
-            paginationMinBlocks: 5,
+            paginationMinBlocks: this.isMobileDevice() ? 10 : 5,
             sortingIndicator: 'span',
             getGroups: this.getGroups,
             getData: this.getData
