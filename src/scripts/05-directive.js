@@ -15,8 +15,8 @@
  * @description
  * Directive that instantiates {@link ngTableController ngTableController}.
  */
-app.directive('ngTable', ['$q', '$parse',
-    function($q, $parse) {
+app.directive('ngTable', ['$q', '$parse', 'NgTableParams',
+    function($q, $parse, NgTableParams) {
         'use strict';
 
         return {
@@ -25,6 +25,7 @@ app.directive('ngTable', ['$q', '$parse',
             scope: true,
             controller: 'ngTableController',
             compile: function(element) {
+                var isMobileDevice = (new NgTableParams()).isMobileDevice();
                 var columns = [],
                     i = 0,
                     row = null;
@@ -42,6 +43,12 @@ app.directive('ngTable', ['$q', '$parse',
                 angular.forEach(row.find('td'), function(item) {
                     var el = angular.element(item);
                     if (el.attr('ignore-cell') && 'true' === el.attr('ignore-cell')) {
+                        return;
+                    }
+
+                    var hideOnMobile = el.attr('hide-on-mobile') == '' ? true : false;
+                    if(hideOnMobile && isMobileDevice) {
+                        el.hide();
                         return;
                     }
 
