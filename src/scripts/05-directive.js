@@ -49,7 +49,7 @@ app.directive('ngTable', ['$q', '$parse', 'NgTableParams',
                     var hideOnMobile = el.attr('hide-on-mobile') == '' ? true : false;
                     if(hideOnMobile && isMobileDevice) {
                         el.hide();
-                        return;
+                        el.attr('ng-show', 'false');
                     }
 
                     var getAttrValue = function(attr){

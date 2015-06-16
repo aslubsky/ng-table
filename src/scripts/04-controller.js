@@ -69,7 +69,8 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
         if (!$element.hasClass('ng-table')) {
             $scope.templates = {
                 header: ($attrs.templateHeader ? $attrs.templateHeader : 'ng-table/header.html'),
-                pagination: ($attrs.templatePagination ? $attrs.templatePagination : 'ng-table/pager.html')
+                pagination: ($attrs.templatePagination ? $attrs.templatePagination : 'ng-table/pager.html'),
+                mobileFilters: ($attrs.templateMobileFilters ? $attrs.templateMobileFilters : 'ng-table/mobile-filters.html')
             };
             $element.addClass('ng-table');
             var headerTemplate = null;
@@ -77,14 +78,20 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
                 headerTemplate = angular.element(document.createElement('thead')).attr('ng-include', 'templates.header');
                 $element.prepend(headerTemplate);
             }
+            var mobileFiltersTemplate = angular.element(document.createElement('div')).attr({
+                'ng-include': 'templates.mobileFilters'
+            });
+
             var paginationTemplate = angular.element(document.createElement('div')).attr({
                 'ng-table-pagination': 'params',
                 'template-url': 'templates.pagination'
             });
+            $element.before(mobileFiltersTemplate);
             $element.after(paginationTemplate);
             if (headerTemplate) {
                 $compile(headerTemplate)($scope);
             }
+            $compile(mobileFiltersTemplate)($scope);
             $compile(paginationTemplate)($scope);
         }
     };
