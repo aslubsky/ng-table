@@ -47,6 +47,14 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
             return;
         }
 
+        var prms = newParams.filter;
+        var filterKeys = Object.keys(prms);
+        filterKeys.forEach(function(filterKey){
+            if(!prms[filterKey] || (angular.isDefined(prms[filterKey][0]) && prms[filterKey][0].length == 0)) {
+                delete prms[filterKey];
+            }
+        });
+
         $scope.params.settings().$scope = $scope;
 
         if (!angular.equals(newParams.filter, oldParams.filter)) {
