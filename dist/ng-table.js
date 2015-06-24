@@ -156,7 +156,7 @@ app.factory('NgTableParams', ['$q', '$log', 'ngTableDefaults', function($q, $log
          * @returns {Bool}
          */
         this.isMobileDevice = function () {
-            return window.screen.availWidth <= 768;// @TODO magic number 768
+            return $(window).width() <= 768;// @TODO magic number 768
         };
 
         /**
