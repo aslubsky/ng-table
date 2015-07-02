@@ -89,6 +89,7 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
             });
 
             var paginationTemplate = angular.element(document.createElement('div')).attr({
+                'class': 'ng-table-pagination',
                 'ng-table-pagination': 'params',
                 'template-url': 'templates.pagination'
             });
@@ -99,6 +100,12 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
             }
             $compile(mobileFiltersTemplate)($scope);
             $compile(paginationTemplate)($scope);
+
+            setTimeout(function(){
+                if($element.width() > paginationTemplate.width()) {
+                    paginationTemplate.width($element.width()+'px');
+                }
+            }, 2000);
         }
     };
 
