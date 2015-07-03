@@ -129,10 +129,10 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
                         // if none of the above was found - we just want an empty array
                         data = [];
                     } else if (angular.isArray(data)) {
-                        data.unshift({
-                            title: '-',
-                            id: ''
-                        });
+                        //data.unshift({
+                        //    title: '-',
+                        //    id: ''
+                        //});
                     }
                     $column.data = data;
                 });
