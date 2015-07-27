@@ -445,6 +445,21 @@ app.factory('NgTableParams', ['$q', '$log', 'ngTableDefaults', function($q, $log
 
         this.settings(baseSettings);
         this.parameters(baseParameters, true);
+
+        this.checkboxes = {
+            'checkedVisible': {},
+            'checkedAll': false,
+            'checkedPage': {},
+            'checkedAny': false,
+            'items': {},
+            'checkedItems': 0,
+            'unselectable': {
+                'params': {},
+                'ids': {}
+            }
+        };
+
+
         return this;
     };
     return NgTableParams;
