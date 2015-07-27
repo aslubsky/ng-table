@@ -627,11 +627,11 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
             $compile(mobileFiltersTemplate)($scope);
             $compile(paginationTemplate)($scope);
 
-            setTimeout(function(){
-                if($element.width() > paginationTemplate.width()) {
-                    paginationTemplate.width($element.width()+'px');
-                }
-            }, 2000);
+            //setTimeout(function(){
+            //    if($element.width() > paginationTemplate.width()) {
+            //        paginationTemplate.width($element.width()+'px');
+            //    }
+            //}, 2000);
         }
     };
 
