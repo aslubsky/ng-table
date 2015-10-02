@@ -20,7 +20,7 @@
     <th data-title-text="{{$column.titleAlt(this) || $column.title(this)}}" ng-repeat="$column in $columns" ng-show="$column.show(this)" class="filter">
         <div ng-repeat="(name, filter) in $column.filter(this)">
             <div ng-if="filter.indexOf('/') !== -1" ng-include="filter"></div>
-            <div ng-if="filter.indexOf('/') === -1" ng-include="'ng-table/filters/' + filter + '.html'"></div>
+            <div ng-if="filter.indexOf('/') === -1" ng-include="'themes/default/views/block/ng-table/filters/' + filter + '.html'"></div>
         </div>
     </th>
 </tr>
