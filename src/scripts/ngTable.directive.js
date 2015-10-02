@@ -16,8 +16,8 @@
      * @description
      * Directive that instantiates {@link ngTableController ngTableController}.
      */
-    angular.module('ngTable').directive('ngTable', ['$q', '$parse',
-        function($q, $parse) {
+    angular.module('ngTable').directive('ngTable', ['$q', '$parse', 'NgTableParams',
+        function($q, $parse, NgTableParams) {
             'use strict';
 
             return {
@@ -26,6 +26,8 @@
                 scope: true,
                 controller: 'ngTableController',
                 compile: function(element) {
+                    var isMobileDevice = (new NgTableParams()).isMobileDevice();
+
                     var columns = [],
                         i = 0,
                         dataRow,
@@ -93,6 +95,13 @@
                         if (titleExpr){
                             el.attr('data-title-text', '{{' + titleExpr + '}}'); // this used in responsive table
                         }
+
+                        var hideOnMobile = el.attr('hide-on-mobile') == '';
+                        if(hideOnMobile && isMobileDevice) {
+                            el.hide();
+                            el.attr('ng-show', 'false');
+                        }
+
                         // NOTE TO MAINTAINERS: if you add extra fields to a $column be sure to extend ngTableColumn with
                         // a corresponding "safe" default
                         columns.push({

@@ -70,6 +70,14 @@
                 if (newParams === oldParams || !newParams) {
                     return;
                 }
+                //empty filters
+                console.log(newParams, oldParams);
+                //angular.forEach(newParams.filter, function(filterVal, filterKey){
+                //    if(!filterVal || (angular.isDefined(filterVal[0]) && filterVal[0].length == 0)) {
+                //        delete newParams.filter[filterKey];
+                //    }
+                //});
+
 
                 newParams.reload();
             }, false);
@@ -97,13 +105,19 @@
                         $element.prepend(headerTemplate);
                     }
                     var paginationTemplate = angular.element(document.createElement('div')).attr({
+                        'class': 'ng-table-pagination',
                         'ng-table-pagination': 'params',
                         'template-url': 'templates.pagination'
                     });
+                    var mobileFiltersTemplate = angular.element(document.createElement('div')).attr({
+                        'ng-include': 'templates.mobileFilters'
+                    });
+                    $element.before(mobileFiltersTemplate);
                     $element.after(paginationTemplate);
                     if (headerTemplate) {
                         $compile(headerTemplate)($scope);
                     }
+                    $compile(mobileFiltersTemplate)($scope);
                     $compile(paginationTemplate)($scope);
                 }
             };

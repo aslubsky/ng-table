@@ -185,6 +185,18 @@
                 return settings;
             };
 
+
+            /**
+             * @ngdoc method
+             * @name NgTableParams#isMobileDevice
+             * @description Return true if screen size < 768px
+             *
+             * @returns {Bool}
+             */
+            this.isMobileDevice = function () {
+                return $(window).width() <= 768;// @TODO magic number 768
+            };
+
             /**
              * @ngdoc method
              * @name NgTableParams#page
@@ -758,8 +770,35 @@
                 counts: [10, 25, 50, 100],
                 interceptors: [],
                 paginationMaxBlocks: 11,
-                paginationMinBlocks: 5,
+                paginationMinBlocks: this.isMobileDevice() ? 10 : 5,
                 sortingIndicator: 'span'
+            };
+
+            this.checkboxes = {
+                'checkedVisible': {},
+                'checkedAll': false,
+                'checkedPage': {},
+                'checkedAny': false,
+                'items': {},
+                'checkedItems': 0,
+                'unselectable': {
+                    'params': {},
+                    'ids': {}
+                }
+            };
+            this.resetCheckboxes = function () {
+                this.checkboxes = {
+                    'checkedVisible': {},
+                    'checkedAll': false,
+                    'checkedPage': {},
+                    'checkedAny': false,
+                    'items': {},
+                    'checkedItems': 0,
+                    'unselectable': {
+                        'params': {},
+                        'ids': {}
+                    }
+                };
             };
 
             this.settings(defaultFettingsFns);
