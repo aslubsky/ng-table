@@ -48,7 +48,7 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
         }
 
         angular.forEach(newParams.filter, function(filterVal, filterKey){
-            if(filterVal === null || filterVal === false || filterVal === '' || (angular.isDefined(filterVal[0]) && filterVal[0].length == 0)) {
+            if(angular.isDefined(filterVal) && (filterVal === null || filterVal === false || filterVal === '' || (angular.isDefined(filterVal[0]) && filterVal[0].length == 0))) {
                 delete newParams.filter[filterKey];
             }
         });
